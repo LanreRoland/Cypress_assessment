@@ -1,14 +1,19 @@
-name: Cypress
+name: Cypress Tests
 
-on: [push]
+on: [push, pull_request]
 
-jobs: 
-  build:
-  runs-on: ubuntu latest
-  steps:
-  -name: Checkout
-   uses: actions/checkout@v3
-  -name: Run Cypress Test
-   users: cypress-io/github-acions@v5
-   with:
-   node-version: 16
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npm run cy:run  # Replace with your actual npm script to run Cypress
+
+
